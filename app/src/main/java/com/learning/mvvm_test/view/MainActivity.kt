@@ -4,9 +4,6 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
 import com.learning.mvvm_test.databinding.ActivityMainBinding
 import com.learning.mvvm_test.viewModel.QuoteViewModel
 
@@ -22,11 +19,10 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        quoteViewModel.quoteModel.observe(this, Observer { currentQuote ->
+        quoteViewModel.quoteModel.observe(this) { currentQuote ->
             binding.tvQuote.text = currentQuote.quote
             binding.tvAuthor.text = currentQuote.author
-        })
-
+        }
         binding.viewContainer.setOnClickListener{quoteViewModel.randomQuote()}
     }
 }
